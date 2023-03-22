@@ -2,30 +2,38 @@ package com.wietek.ksb2module8relecje.model;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
-@Table(name = "students")
-public class Student {
+@Table(name = "professors")
+public class Professor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String surname;
-    private String groupNumber;
+    private String title;
+    @ManyToMany
+    private Set<Student> studentSet;
     @OneToOne
-    private Backpack backpack;
+    private Room room;
 
-    public Student() {
+
+    public Professor() {
     }
-    public Student(String name, String surname, String groupNumber) {
+
+    public Professor(String name, String surname, String title) {
         this.name = name;
         this.surname = surname;
-        this.groupNumber = groupNumber;
+        this.title = title;
     }
-    public void setId(Long id) {
-        this.id = id;
-    }
+
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -44,19 +52,27 @@ public class Student {
         this.surname = surname;
     }
 
-    public String getGroupNumber() {
-        return groupNumber;
+    public String getTitle() {
+        return title;
     }
 
-    public void setGroupNumber(String groupNumber) {
-        this.groupNumber = groupNumber;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public Backpack getBackpack() {
-        return backpack;
+    public Set<Student> getStudentSet() {
+        return studentSet;
     }
 
-    public void setBackpack(Backpack backpack) {
-        this.backpack = backpack;
+    public void setStudentSet(Set<Student> studentSet) {
+        this.studentSet = studentSet;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
     }
 }
